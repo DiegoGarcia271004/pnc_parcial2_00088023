@@ -1,0 +1,14 @@
+package org.example.parcialncapas.domain.dto.response;
+
+import lombok.Builder;
+import lombok.Data;
+
+import java.time.LocalDate;
+
+@Data
+@Builder
+public class ApiErrorResponse {
+    private Object message;
+    private int status;
+    private LocalDate time;
+}
