@@ -2,8 +2,11 @@ package org.example.parcialncapas.common;
 
 import lombok.RequiredArgsConstructor;
 import org.example.parcialncapas.domain.dto.request.CreateMagicArticleRequest;
+import org.example.parcialncapas.domain.dto.request.CreateMagicProviderRequest;
 import org.example.parcialncapas.domain.dto.request.UpdateMagicArticleRequest;
+import org.example.parcialncapas.domain.dto.request.UpdateMagicProviderRequest;
 import org.example.parcialncapas.domain.dto.response.MagicArticleResponse;
+import org.example.parcialncapas.domain.dto.response.MagicProviderResponse;
 import org.example.parcialncapas.domain.entity.MagicArticle;
 import org.example.parcialncapas.domain.entity.MagicProvider;
 import org.example.parcialncapas.repository.MagicProviderRepository;
@@ -16,6 +19,28 @@ import java.util.UUID;
 public class MagicArticleMapper {
 
     private final MagicProviderRepository magicProviderRepository;
+
+    public MagicProvider toEntityCreate(CreateMagicProviderRequest req) {
+        return  MagicProvider.builder()
+                .name(req.getName())
+                .type(req.getType())
+                .build();
+    }
+
+    public MagicProvider toEntityUpdate(UpdateMagicProviderRequest req) {
+        return  MagicProvider.builder()
+                .name(req.getName())
+                .type(req.getType())
+                .build();
+    }
+
+    public MagicProviderResponse toDto(MagicProvider entity) {
+        return MagicProviderResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .type(entity.getType())
+                .build();
+    }
 
     public MagicArticle toEntityCreate(CreateMagicArticleRequest req) {
 

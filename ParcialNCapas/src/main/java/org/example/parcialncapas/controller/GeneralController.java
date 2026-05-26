@@ -2,10 +2,12 @@ package org.example.parcialncapas.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.parcialncapas.domain.dto.request.CreateMagicArticleRequest;
+import org.example.parcialncapas.domain.dto.request.CreateMagicProviderRequest;
 import org.example.parcialncapas.domain.dto.request.UpdateMagicArticleRequest;
 import org.example.parcialncapas.domain.dto.response.GeneralResponse;
 import org.example.parcialncapas.domain.entity.Type;
 import org.example.parcialncapas.service.MagicArticleService;
+import org.example.parcialncapas.service.MagicProviderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class GeneralEntityController {
+public class GeneralController {
     private final MagicArticleService magicArticleService;
+    private final MagicProviderService magicProviderService;
+
+    @PostMapping("/provider")
+    public ResponseEntity<GeneralResponse> createProvider(@RequestBody CreateMagicProviderRequest req) {
+        return buildResponse("Magic provider created successfully",
+        HttpStatus.CREATED,
+        magicProviderService.createMagicProvider(req));
+    }
 
     @PostMapping("/artefacts")
-    public ResponseEntity<GeneralResponse> createSpecimenById(@RequestBody CreateMagicArticleRequest req) {
+    public ResponseEntity<GeneralResponse> createArticleBy(@RequestBody CreateMagicArticleRequest req) {
         return buildResponse(
                 "Magic article created successfully",
                 HttpStatus.CREATED,
